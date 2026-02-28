@@ -1,0 +1,444 @@
+:root {
+  --header-height: 70px;
+  --z-fixed: 100;
+  --primary-color: #1a56db;
+  --secondary-color: #111827;
+  --background-color: #f0f4ff;
+  --card-background: #fff;
+  --text-color: #000;
+  --light-blue: #dbeafe;
+  --spacing-sm: 20px;
+  --spacing-md: 40px;
+  --spacing-lg: 60px;
+  --border-radius: 8px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  padding-top: var(--header-height);
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-sm);
+}
+
+/* Section Styles */
+section {
+  margin-top: var(--spacing-lg);
+  position: relative;
+}
+
+.section-description {
+  text-align: center;
+  color: #4b5563;
+  margin-bottom: var(--spacing-md);
+  font-size: 1.1rem;
+}
+
+.section-title {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--primary-color);
+}
+
+/* Header & Hero Section */
+header {
+  text-align: center;
+  padding: var(--spacing-md) 0;
+}
+
+.hero-logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: var(--spacing-md);
+}
+
+header h1 {
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+.hero-section {
+  padding: var(--spacing-lg) 0;
+  background-color: var(--background-color);
+  margin-bottom: var(--spacing-md);
+}
+
+/* Navbar */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--card-background);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: var(--z-fixed);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--spacing-sm);
+}
+
+.nav__logo {
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.nav__button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.nav__button:hover {
+  background-color: #1544ad;
+}
+
+/* Full Width Section Styles */
+.contact-section,
+.benefits-section,
+.faq-section {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding: var(--spacing-lg) 0;
+}
+
+.contact-section,
+.faq-section {
+  background-color: #fff;
+}
+
+.benefits-section {
+  background-color: transparent;
+  padding: var(--spacing-lg) 0;
+}
+
+.benefits-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Section Content Wrappers */
+.section-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-sm);
+}
+
+/* Contact Cards */
+.contact-cards {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.contact-card {
+  background: var(--card-background);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+.contact-card .icon {
+  stroke: var(--primary-color);
+  stroke-width: 1.5;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+}
+
+.contact-number {
+  font-size: 20px;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* Benefits */
+.benefits {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.benefit-card {
+  width: 300px;
+  text-align: center;
+  padding: var(--spacing-md);
+  transition: transform 0.3s ease;
+  background: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-card:hover {
+  transform: scale(1.05);
+}
+
+/* FAQ Section */
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  margin-bottom: var(--spacing-sm);
+  border: 1px solid #e5e7eb;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.faq-question {
+  background: var(--card-background);
+  padding: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.faq-question::after {
+  content: '+';
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.faq-question.active::after {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  padding: 0 15px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-answer.active {
+  padding: 15px;
+  max-height: 500px;
+}
+
+/* CTA Section */
+.cta-section {
+  background: var(--light-blue);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  text-align: center;
+  margin: var(--spacing-md) 0;
+}
+
+.cta-contact-info {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contact-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  margin-top: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.contact-button {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.contact-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  animation: none;
+}
+
+.contact-button:active {
+  transform: translateY(-1px);
+}
+
+.phone-button {
+  background: linear-gradient(135deg, #1a56db, #1544ad);
+}
+
+.whatsapp-button {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+}
+
+.button-icon {
+  margin-right: 8px;
+  font-size: 1.2em;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Footer */
+.footer {
+  background-color: #131c2b;
+  color: #d1d5db;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  margin-top: var(--spacing-lg);
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-column {
+  flex: 1 1 300px;
+  margin: 10px;
+}
+
+.footer-column h4 {
+  color: #f9fafb;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.footer-divider {
+  border: none;
+  border-top: 1px solid #374151;
+  margin: 30px 0;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #9ca3af;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-bottom p {
+  margin: 5px 0;
+}
+
+/* Section Headers */
+h2 {
+  text-align: center;
+  color: var(--secondary-color);
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.8rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact-cards, .benefits {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-card, .benefit-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .footer-column {
+    margin: 0;
+    padding: 10px 0;
+  }
+
+  .footer-column ul li {
+    margin-bottom: 5px;
+  }
+
+  .footer-divider {
+    margin: 20px 0;
+  }
+}
